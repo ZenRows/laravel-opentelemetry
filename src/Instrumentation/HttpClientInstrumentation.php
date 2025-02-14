@@ -1,10 +1,10 @@
 <?php
 
-namespace Keepsuit\LaravelOpenTelemetry\Instrumentation;
+namespace LaravelOpenTelemetry\Instrumentation;
 
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Arr;
-use Keepsuit\LaravelOpenTelemetry\Support\HttpClient\GuzzleTraceMiddleware;
+use LaravelOpenTelemetry\Support\HttpClient\GuzzleTraceMiddleware;
 
 class HttpClientInstrumentation implements Instrumentation
 {

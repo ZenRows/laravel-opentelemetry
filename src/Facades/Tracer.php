@@ -1,9 +1,9 @@
 <?php
 
-namespace Keepsuit\LaravelOpenTelemetry\Facades;
+namespace LaravelOpenTelemetry\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Keepsuit\LaravelOpenTelemetry\Support\SpanBuilder;
+use LaravelOpenTelemetry\Support\SpanBuilder;
 use OpenTelemetry\API\Trace\SpanInterface;
 use OpenTelemetry\Context\Context;
 use OpenTelemetry\Context\ContextInterface;
@@ -23,6 +23,6 @@ class Tracer extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \Keepsuit\LaravelOpenTelemetry\Tracer::class;
+        return \LaravelOpenTelemetry\Tracer::class;
     }
 }

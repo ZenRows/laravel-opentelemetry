@@ -1,11 +1,11 @@
 <?php
 
-namespace Keepsuit\LaravelOpenTelemetry\Instrumentation;
+namespace LaravelOpenTelemetry\Instrumentation;
 
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
-use Keepsuit\LaravelOpenTelemetry\Facades\Tracer;
+use LaravelOpenTelemetry\Facades\Tracer;
 use OpenTelemetry\API\Trace\SpanKind;
 use OpenTelemetry\SemConv\TraceAttributes;
 

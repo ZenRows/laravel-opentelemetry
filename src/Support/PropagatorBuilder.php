@@ -1,6 +1,6 @@
 <?php
 
-namespace Keepsuit\LaravelOpenTelemetry\Support;
+namespace LaravelOpenTelemetry\Support;
 
 use Illuminate\Support\Facades\Log;
 use OpenTelemetry\Context\Propagation\MultiTextMapPropagator;

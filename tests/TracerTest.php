@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Log;
-use Keepsuit\LaravelOpenTelemetry\Facades\Tracer;
+use LaravelOpenTelemetry\Facades\Tracer;
 use OpenTelemetry\API\Trace\SpanInterface;
 use OpenTelemetry\API\Trace\SpanKind;
 use OpenTelemetry\API\Trace\StatusCode;
@@ -14,11 +14,11 @@ beforeEach(function () {
 });
 
 it('can resolve laravel tracer', function () {
-    /** @var \Keepsuit\LaravelOpenTelemetry\Tracer $tracer */
-    $tracer = app(\Keepsuit\LaravelOpenTelemetry\Tracer::class);
+    /** @var \LaravelOpenTelemetry\Tracer $tracer */
+    $tracer = app(\LaravelOpenTelemetry\Tracer::class);
 
     expect($tracer)
-        ->toBeInstanceOf(\Keepsuit\LaravelOpenTelemetry\Tracer::class)
+        ->toBeInstanceOf(\LaravelOpenTelemetry\Tracer::class)
         ->traceId()->toBeNull()
         ->activeSpan()->toBeInstanceOf(\OpenTelemetry\API\Trace\NonRecordingSpan::class);
 });

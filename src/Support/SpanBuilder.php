@@ -1,6 +1,6 @@
 <?php
 
-namespace Keepsuit\LaravelOpenTelemetry\Support;
+namespace LaravelOpenTelemetry\Support;
 
 use Carbon\CarbonInterface;
 use Closure;

@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
-use Keepsuit\LaravelOpenTelemetry\Facades\Tracer;
-use Keepsuit\LaravelOpenTelemetry\Instrumentation\HttpServerInstrumentation;
-use Keepsuit\LaravelOpenTelemetry\Tests\Support\Product;
+use LaravelOpenTelemetry\Facades\Tracer;
+use LaravelOpenTelemetry\Instrumentation\HttpServerInstrumentation;
+use LaravelOpenTelemetry\Tests\Support\Product;
 use OpenTelemetry\API\Trace\SpanKind;
 use OpenTelemetry\API\Trace\StatusCode;
 

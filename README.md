@@ -20,7 +20,7 @@ composer require keepsuit/laravel-opentelemetry
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --provider="Keepsuit\LaravelOpenTelemetry\LaravelOpenTelemetryServiceProvider" --tag="opentelemetry-config"
+php artisan vendor:publish --provider="LaravelOpenTelemetry\LaravelOpenTelemetryServiceProvider" --tag="opentelemetry-config"
 ```
 
 This is the contents of the published config file:
@@ -28,7 +28,7 @@ This is the contents of the published config file:
 ```php
 <?php
 
-use Keepsuit\LaravelOpenTelemetry\Instrumentation;
+use LaravelOpenTelemetry\Instrumentation;
 
 return [
     /**
@@ -180,7 +180,7 @@ You can disable or customize each integration in the config file in the `instrum
 
 ### Http server requests
 
-Http server requests are automatically traced by injecting `\Keepsuit\LaravelOpenTelemetry\Support\HttpServer\TraceRequestMiddleware::class` to the global middlewares.
+Http server requests are automatically traced by injecting `\LaravelOpenTelemetry\Support\HttpServer\TraceRequestMiddleware::class` to the global middlewares.
 You can disable it by setting `OT_INSTRUMENTATION_HTTP_SERVER` to `false` or removing the `HttpServerInstrumentation::class` from the config file.
 
 Configuration options:
@@ -240,7 +240,7 @@ This method returns a `SpanBuilder` instance that can be used to customize and s
 The simplest way to create a custom trace is with `measure` method:
 
 ```php
-use Keepsuit\LaravelOpenTelemetry\Facades\Tracer;
+use LaravelOpenTelemetry\Facades\Tracer;
 
 Tracer::newSpan('my custom trace')->measure(function () {
     // do something
@@ -250,7 +250,7 @@ Tracer::newSpan('my custom trace')->measure(function () {
 Alternatively you can manage the span manually:
 
 ```php
-use Keepsuit\LaravelOpenTelemetry\Facades\Tracer;
+use LaravelOpenTelemetry\Facades\Tracer;
 
 $span = Tracer::newSpan('my custom trace')->start();
 
@@ -263,7 +263,7 @@ With `measure` the span is automatically set to active (so it will be used as pa
 With `start` you have to manually set the span as active:
 
 ```php
-use Keepsuit\LaravelOpenTelemetry\Facades\Tracer;
+use LaravelOpenTelemetry\Facades\Tracer;
 
 $span = Tracer::newSpan('my custom trace')->start();
 $scope = $span->activate()
@@ -277,7 +277,7 @@ $span->end();
 Other utility methods are available on the `Tracer` facade:
 
 ```php
-use Keepsuit\LaravelOpenTelemetry\Facades\Tracer;
+use LaravelOpenTelemetry\Facades\Tracer;
 
 Tracer::traceId(); // get the active trace id
 Tracer::activeSpan(); // get the active span
@@ -298,7 +298,7 @@ This packages injects a log channel named `otlp` that can be used to send logs t
     // injected channel config, you can override it adding an `otlp` channel in your config
     'otlp' => [
         'driver' => 'monolog',
-        'handler' => \Keepsuit\LaravelOpenTelemetry\Support\OpenTelemetryMonologHandler::class,
+        'handler' => \LaravelOpenTelemetry\Support\OpenTelemetryMonologHandler::class,
         'level' => 'debug',
     ]
 ]
@@ -307,7 +307,7 @@ This packages injects a log channel named `otlp` that can be used to send logs t
 As an alternative, you can use the `Logger` facade to send logs directly to OpenTelemetry:
 
 ```php
-use Keepsuit\LaravelOpenTelemetry\Facades\Logger;
+use LaravelOpenTelemetry\Facades\Logger;
 
 Logger::emergency('my log message');
 Logger::alert('my log message');

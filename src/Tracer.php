@@ -1,9 +1,9 @@
 <?php
 
-namespace Keepsuit\LaravelOpenTelemetry;
+namespace LaravelOpenTelemetry;
 
 use Illuminate\Support\Facades\Log;
-use Keepsuit\LaravelOpenTelemetry\Support\SpanBuilder;
+use LaravelOpenTelemetry\Support\SpanBuilder;
 use OpenTelemetry\API\Trace\SpanContextValidator;
 use OpenTelemetry\API\Trace\SpanInterface;
 use OpenTelemetry\API\Trace\TracerInterface;

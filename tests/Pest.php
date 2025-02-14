@@ -4,7 +4,7 @@ use Illuminate\Support\Collection;
 use OpenTelemetry\API\Globals;
 use OpenTelemetry\SDK\Trace\TracerProviderInterface;
 
-uses(\Keepsuit\LaravelOpenTelemetry\Tests\TestCase::class)->in(__DIR__);
+uses(\LaravelOpenTelemetry\Tests\TestCase::class)->in(__DIR__);
 
 /**
  * @return Collection<array-key,\OpenTelemetry\SDK\Trace\ImmutableSpan>
@@ -23,7 +23,7 @@ function getRecordedSpans(): Collection
 
 function withRootSpan(Closure $callback): mixed
 {
-    $rootSpan = \Keepsuit\LaravelOpenTelemetry\Facades\Tracer::newSpan('root')->start();
+    $rootSpan = \LaravelOpenTelemetry\Facades\Tracer::newSpan('root')->start();
     $rootScope = $rootSpan->activate();
 
     $result = $callback();

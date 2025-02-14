@@ -1,12 +1,12 @@
 <?php
 
-namespace Keepsuit\LaravelOpenTelemetry\Instrumentation;
+namespace LaravelOpenTelemetry\Instrumentation;
 
 use Illuminate\Cache\Events\CacheHit;
 use Illuminate\Cache\Events\CacheMissed;
 use Illuminate\Cache\Events\KeyForgotten;
 use Illuminate\Cache\Events\KeyWritten;
-use Keepsuit\LaravelOpenTelemetry\Facades\Tracer;
+use LaravelOpenTelemetry\Facades\Tracer;
 
 class CacheInstrumentation implements Instrumentation
 {

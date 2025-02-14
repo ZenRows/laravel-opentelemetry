@@ -1,6 +1,6 @@
 <?php
 
-namespace Keepsuit\LaravelOpenTelemetry\Tests\Support;
+namespace LaravelOpenTelemetry\Tests\Support;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace Keepsuit\LaravelOpenTelemetry\Support\HttpClient;
+namespace LaravelOpenTelemetry\Support\HttpClient;
 
 use Closure;
 use GuzzleHttp\Promise\PromiseInterface;
-use Keepsuit\LaravelOpenTelemetry\Facades\Tracer;
-use Keepsuit\LaravelOpenTelemetry\Instrumentation\HttpClientInstrumentation;
+use LaravelOpenTelemetry\Facades\Tracer;
+use LaravelOpenTelemetry\Instrumentation\HttpClientInstrumentation;
 use OpenTelemetry\API\Trace\SpanInterface;
 use OpenTelemetry\API\Trace\SpanKind;
 use OpenTelemetry\API\Trace\StatusCode;

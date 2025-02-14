@@ -3,8 +3,8 @@
 use GuzzleHttp\Server\Server;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
-use Keepsuit\LaravelOpenTelemetry\Facades\Tracer;
-use Keepsuit\LaravelOpenTelemetry\Instrumentation\HttpClientInstrumentation;
+use LaravelOpenTelemetry\Facades\Tracer;
+use LaravelOpenTelemetry\Instrumentation\HttpClientInstrumentation;
 use OpenTelemetry\API\Trace\SpanKind;
 use OpenTelemetry\API\Trace\StatusCode;
 

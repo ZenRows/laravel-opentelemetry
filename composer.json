@@ -1,12 +1,11 @@
 {
-    "name": "keepsuit/laravel-opentelemetry",
+    "name": "zenrows/laravel-opentelemetry",
     "description": "OpenTelemetry integration for laravel",
     "keywords": [
-        "keepsuit",
         "laravel",
         "opentelemetry"
     ],
-    "homepage": "https://github.com/keepsuit/laravel-opentelemetry",
+    "homepage": "https://github.com/zenrows/laravel-opentelemetry",
     "license": "MIT",
     "authors": [
         {
@@ -21,6 +20,7 @@
         "illuminate/support": "^10.0 || ^11.0",
         "open-telemetry/api": "^1.1",
         "open-telemetry/context": "^1.1",
+        "open-telemetry/contrib-aws": "dev-main",
         "open-telemetry/exporter-otlp": "^1.1",
         "open-telemetry/sdk": "^1.1",
         "open-telemetry/sem-conv": "^1.27",
@@ -62,12 +62,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Keepsuit\\LaravelOpenTelemetry\\": "src"
+            "LaravelOpenTelemetry\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Keepsuit\\LaravelOpenTelemetry\\Tests\\": "tests"
+            "LaravelOpenTelemetry\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -91,7 +91,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Keepsuit\\LaravelOpenTelemetry\\LaravelOpenTelemetryServiceProvider"
+                "LaravelOpenTelemetry\\LaravelOpenTelemetryServiceProvider"
             ]
         }
     },

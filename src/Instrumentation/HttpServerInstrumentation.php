@@ -1,10 +1,10 @@
 <?php
 
-namespace Keepsuit\LaravelOpenTelemetry\Instrumentation;
+namespace LaravelOpenTelemetry\Instrumentation;
 
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\Arr;
-use Keepsuit\LaravelOpenTelemetry\Support\HttpServer\TraceRequestMiddleware;
+use LaravelOpenTelemetry\Support\HttpServer\TraceRequestMiddleware;
 
 class HttpServerInstrumentation implements Instrumentation
 {

@@ -1,8 +1,8 @@
 <?php
 
 use Composer\InstalledVersions;
-use Keepsuit\LaravelOpenTelemetry\Support\PropagatorBuilder;
-use Keepsuit\LaravelOpenTelemetry\Support\SamplerBuilder;
+use LaravelOpenTelemetry\Support\PropagatorBuilder;
+use LaravelOpenTelemetry\Support\SamplerBuilder;
 
 it('can build open telemetry tracer', function () {
     /** @var \OpenTelemetry\SDK\Trace\Tracer $tracer */
@@ -13,7 +13,7 @@ it('can build open telemetry tracer', function () {
 
     expect($tracer->getInstrumentationScope())
         ->getName()->toBe('laravel-opentelemetry')
-        ->getVersion()->toBe(InstalledVersions::getPrettyVersion('keepsuit/laravel-opentelemetry'));
+        ->getVersion()->toBe(InstalledVersions::getPrettyVersion('zenrows/laravel-opentelemetry'));
 });
 
 it('can register multiple propagators', function () {

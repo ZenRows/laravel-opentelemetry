@@ -1,6 +1,6 @@
 <?php
 
-namespace Keepsuit\LaravelOpenTelemetry;
+namespace LaravelOpenTelemetry;
 
 use OpenTelemetry\API\Common\Time\Clock;
 use OpenTelemetry\API\Logs\LoggerInterface;

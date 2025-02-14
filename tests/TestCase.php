@@ -1,9 +1,9 @@
 <?php
 
-namespace Keepsuit\LaravelOpenTelemetry\Tests;
+namespace LaravelOpenTelemetry\Tests;
 
 use Illuminate\Support\Str;
-use Keepsuit\LaravelOpenTelemetry\LaravelOpenTelemetryServiceProvider;
+use LaravelOpenTelemetry\LaravelOpenTelemetryServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 use function Orchestra\Testbench\load_migration_paths;

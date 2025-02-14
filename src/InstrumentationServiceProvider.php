@@ -1,9 +1,9 @@
 <?php
 
-namespace Keepsuit\LaravelOpenTelemetry;
+namespace LaravelOpenTelemetry;
 
 use Illuminate\Support\ServiceProvider;
-use Keepsuit\LaravelOpenTelemetry\Instrumentation\Instrumentation;
+use LaravelOpenTelemetry\Instrumentation\Instrumentation;
 
 class InstrumentationServiceProvider extends ServiceProvider
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Keepsuit\LaravelOpenTelemetry;
+namespace LaravelOpenTelemetry;
 
 use Composer\InstalledVersions;
 use Http\Discovery\Psr17FactoryDiscovery;
@@ -10,15 +10,17 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Env;
 use Illuminate\Support\Str;
-use Keepsuit\LaravelOpenTelemetry\Support\CarbonClock;
-use Keepsuit\LaravelOpenTelemetry\Support\OpenTelemetryMonologHandler;
-use Keepsuit\LaravelOpenTelemetry\Support\PropagatorBuilder;
-use Keepsuit\LaravelOpenTelemetry\Support\SamplerBuilder;
+use LaravelOpenTelemetry\Support\CarbonClock;
+use LaravelOpenTelemetry\Support\OpenTelemetryMonologHandler;
+use LaravelOpenTelemetry\Support\PropagatorBuilder;
+use LaravelOpenTelemetry\Support\SamplerBuilder;
 use OpenTelemetry\API\Common\Time\Clock;
 use OpenTelemetry\API\Instrumentation\CachedInstrumentation;
 use OpenTelemetry\API\Logs\LoggerInterface;
 use OpenTelemetry\API\Signals;
 use OpenTelemetry\API\Trace\TracerInterface;
+use OpenTelemetry\Aws\Xray\IdGenerator;
+use OpenTelemetry\Aws\Xray\Propagator;
 use OpenTelemetry\Context\Propagation\TextMapPropagatorInterface;
 use OpenTelemetry\Contrib\Grpc\GrpcTransportFactory;
 use OpenTelemetry\Contrib\Otlp\HttpEndpointResolver;
@@ -48,6 +50,8 @@ use OpenTelemetry\SemConv\ResourceAttributes;
 use OpenTelemetry\SemConv\TraceAttributes;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\HttpFactory;
 
 class LaravelOpenTelemetryServiceProvider extends PackageServiceProvider
 {
@@ -76,7 +80,35 @@ class LaravelOpenTelemetryServiceProvider extends PackageServiceProvider
             ]))
         );
 
-        $propagator = PropagatorBuilder::new()->build(config('opentelemetry.propagators'));
+        if (config('opentelemetry.propagators') === 'xray') {
+            $propagator = new Propagator();
+            $idGenerator = new IdGenerator();
+
+            $client = new Client();
+            $requestFactory = new HttpFactory();
+
+            switch (config('opentelemetry.xray.detector.cloud_platform')) {
+                case 'ec2':
+                    $detector = new \OpenTelemetry\Aws\Ec2\Detector($client, $requestFactory);
+                    $resource->merge($detector->getResource());
+                    break;
+                case 'ecs':
+                    $detector = new \OpenTelemetry\Aws\Ecs\Detector(new \OpenTelemetry\Aws\Ecs\DataProvider(), $client, $requestFactory);
+                    $resource->merge($detector->getResource());
+                    break;
+                case 'eks':
+                    $detector = new \OpenTelemetry\Aws\Eks\Detector(new \OpenTelemetry\Aws\Eks\DataProvider(), $client, $requestFactory);
+                    $resource->merge($detector->getResource());
+                    break;
+                case 'lambda':
+                    $detector = new \OpenTelemetry\Aws\Lambda\Detector();
+                    $resource->merge($detector->getResource());
+                    break;
+                default:
+            }
+        } else {
+            $propagator = PropagatorBuilder::new()->build(config('opentelemetry.propagators'));
+        }
 
         /**
          * Traces
@@ -92,11 +124,8 @@ class LaravelOpenTelemetryServiceProvider extends PackageServiceProvider
             $samplerConfig['args'] ?? []
         );
 
-        $tracerProvider = TracerProvider::builder()
-            ->setResource($resource)
-            ->addSpanProcessor($spanProcessor)
-            ->setSampler($sampler)
-            ->build();
+
+        $tracerProvider = new TracerProvider($spanProcessor, $sampler, $resource, null, $idGenerator ?? null);
 
         /**
          * Logs
@@ -122,7 +151,7 @@ class LaravelOpenTelemetryServiceProvider extends PackageServiceProvider
 
         $instrumentation = new CachedInstrumentation(
             name: 'laravel-opentelemetry',
-            version: class_exists(InstalledVersions::class) ? InstalledVersions::getPrettyVersion('keepsuit/laravel-opentelemetry') : null,
+            version: class_exists(InstalledVersions::class) ? InstalledVersions::getPrettyVersion('zenrows/laravel-opentelemetry') : null,
             schemaUrl: TraceAttributes::SCHEMA_URL,
         );
 

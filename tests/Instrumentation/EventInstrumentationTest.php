@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Arr;
-use Keepsuit\LaravelOpenTelemetry\Instrumentation\EventInstrumentation;
-use Keepsuit\LaravelOpenTelemetry\Tests\Support\TestEvent;
+use LaravelOpenTelemetry\Instrumentation\EventInstrumentation;
+use LaravelOpenTelemetry\Tests\Support\TestEvent;
 
 it('records string event', function () {
     withRootSpan(function () {

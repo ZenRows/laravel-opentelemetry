@@ -1,12 +1,23 @@
 <?php
 
-use Keepsuit\LaravelOpenTelemetry\Instrumentation;
+use LaravelOpenTelemetry\Instrumentation;
 
 return [
     /**
      * Service name
      */
-    'service_name' => env('OTEL_SERVICE_NAME', \Illuminate\Support\Str::slug((string) env('APP_NAME', 'laravel-app'))),
+    'service_name' => env('OTEL_SERVICE_NAME', \Illuminate\Support\Str::slug((string) env('APP_NAME', 'app'))),
+
+    'xray' => [
+        'detector' => [
+            'cloud_platform' => env('OTEL_XRAY_DETECTOR_CLOUD_PLATFORM', 'ecs'),
+        ],
+        'remote_sampler' => [
+            'endpoint' => env('OTEL_XRAY_REMOTE_SAMPLER_ENDPOINT', 'http://localhost:2000'),
+            'timeout' => env('OTEL_XRAY_REMOTE_SAMPLER_INTERVAL', 1000),
+            'cloud_platform' => env('OTEL_XRAY_REMOTE_SAMPLER_CLOUD_PLATFORM', 'ecs'),
+        ]
+    ],
 
     /**
      * Comma separated list of propagators to use.
@@ -22,7 +33,7 @@ return [
          * Traces exporter
          * This should be the key of one of the exporters defined in the exporters section
          */
-        'exporter' => env('OTEL_TRACES_EXPORTER', 'otlp'),
+        'exporter' => env('OTEL_TRACES_EXPORTER', 'none'),
 
         /**
          * Traces sampler

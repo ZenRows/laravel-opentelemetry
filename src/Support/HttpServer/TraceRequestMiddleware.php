@@ -1,12 +1,12 @@
 <?php
 
-namespace Keepsuit\LaravelOpenTelemetry\Support\HttpServer;
+namespace LaravelOpenTelemetry\Support\HttpServer;
 
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Keepsuit\LaravelOpenTelemetry\Facades\Tracer;
-use Keepsuit\LaravelOpenTelemetry\Instrumentation\HttpServerInstrumentation;
+use LaravelOpenTelemetry\Facades\Tracer;
+use LaravelOpenTelemetry\Instrumentation\HttpServerInstrumentation;
 use OpenTelemetry\API\Trace\SpanInterface;
 use OpenTelemetry\API\Trace\SpanKind;
 use OpenTelemetry\API\Trace\StatusCode;

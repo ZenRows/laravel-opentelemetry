@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Log;
-use Keepsuit\LaravelOpenTelemetry\Facades\Logger;
+use LaravelOpenTelemetry\Facades\Logger;
 use OpenTelemetry\API\Common\Time\Clock;
 use OpenTelemetry\API\Logs\Severity;
 use OpenTelemetry\SDK\Logs\ReadableLogRecord;

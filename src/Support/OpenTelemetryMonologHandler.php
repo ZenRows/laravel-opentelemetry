@@ -1,8 +1,8 @@
 <?php
 
-namespace Keepsuit\LaravelOpenTelemetry\Support;
+namespace LaravelOpenTelemetry\Support;
 
-use Keepsuit\LaravelOpenTelemetry\Facades\Logger;
+use LaravelOpenTelemetry\Facades\Logger;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\LogRecord;
 
