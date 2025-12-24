@@ -19,9 +19,9 @@ use OpenTelemetry\API\Instrumentation\CachedInstrumentation;
 use OpenTelemetry\API\Logs\LoggerInterface;
 use OpenTelemetry\API\Signals;
 use OpenTelemetry\API\Trace\TracerInterface;
-use OpenTelemetry\Aws\Xray\IdGenerator;
-use OpenTelemetry\Aws\Xray\Propagator;
 use OpenTelemetry\Context\Propagation\TextMapPropagatorInterface;
+use OpenTelemetry\Contrib\Aws\Xray\IdGenerator;
+use OpenTelemetry\Contrib\Aws\Xray\Propagator;
 use OpenTelemetry\Contrib\Grpc\GrpcTransportFactory;
 use OpenTelemetry\Contrib\Otlp\HttpEndpointResolver;
 use OpenTelemetry\Contrib\Otlp\LogsExporter;
@@ -89,19 +89,19 @@ class LaravelOpenTelemetryServiceProvider extends PackageServiceProvider
 
             switch (config('opentelemetry.xray.detector.cloud_platform')) {
                 case 'ec2':
-                    $detector = new \OpenTelemetry\Aws\Ec2\Detector($client, $requestFactory);
+                    $detector = new \OpenTelemetry\Contrib\Aws\Ec2\Detector($client, $requestFactory);
                     $resource->merge($detector->getResource());
                     break;
                 case 'ecs':
-                    $detector = new \OpenTelemetry\Aws\Ecs\Detector(new \OpenTelemetry\Aws\Ecs\DataProvider(), $client, $requestFactory);
+                    $detector = new \OpenTelemetry\Contrib\Aws\Ecs\Detector(new \OpenTelemetry\Contrib\Aws\Ecs\DataProvider(), $client, $requestFactory);
                     $resource->merge($detector->getResource());
                     break;
                 case 'eks':
-                    $detector = new \OpenTelemetry\Aws\Eks\Detector(new \OpenTelemetry\Aws\Eks\DataProvider(), $client, $requestFactory);
+                    $detector = new \OpenTelemetry\Contrib\Aws\Eks\Detector(new \OpenTelemetry\Contrib\Aws\Eks\DataProvider(), $client, $requestFactory);
                     $resource->merge($detector->getResource());
                     break;
                 case 'lambda':
-                    $detector = new \OpenTelemetry\Aws\Lambda\Detector();
+                    $detector = new \OpenTelemetry\Contrib\Aws\Lambda\Detector();
                     $resource->merge($detector->getResource());
                     break;
                 default:
